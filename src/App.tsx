@@ -7,18 +7,16 @@ interface Dog {
 
 function App() {
   const [dog, setDog] = useState<Dog>();
-  const [DogArr, setDogArr] = useState<Dog[]> ([])
+  const [DogArr, setDogArr] = useState<Dog[]>([]);
 
   const handleGetDog = async () => {
-    const response = await fetch(
-      "https://dog.ceo/api/breeds/image/random"
-    );
+    const response = await fetch("https://dog.ceo/api/breeds/image/random");
     const jsonBody: Dog = await response.json();
     setDog(jsonBody);
-    
-    if (typeof dog !== 'undefined'){
-      setDogArr([...DogArr,jsonBody])
-  }
+
+    if (typeof dog !== "undefined") {
+      setDogArr([...DogArr, jsonBody]);
+    }
   };
 
   // const handleGetJoke = () => {
@@ -32,12 +30,16 @@ function App() {
       <div>
         <h1>Dog app</h1>
         <details>
-        <img src={dog.message} alt=""/>
+          <img src={dog.message} alt="" />
           <p>{dog.success}</p>
         </details>
         <hr />
         <button onClick={handleGetDog}>Get another joke</button>
-        <p>Dogs: {}</p>
+        <p>
+          Dogs:
+          {DogArr.map((singleDog) => <img src={singleDog.message} alt = ''width="100" 
+     height="100"/> )}
+        </p>
       </div>
     );
   } else {
